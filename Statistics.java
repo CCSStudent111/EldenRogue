@@ -17,33 +17,33 @@ public class Statistics{
     this.nFTH = nFTH;
 }
 
-    public int getLevel(){
-        return nLevel;
-    }
+public int getLevel(){
+    return nLevel;
+}
 
-    public int getHP(){
-        return nHP;
-    }
+public int getHP(){
+    return nHP;
+}
 
-    public int getDEX(){
-        return nDEX;
-    }
+public int getDEX(){
+    return nDEX;
+}
 
-    public int getINT(){
-        return nINT;
-    }
+public int getINT(){
+    return nINT;
+}
 
-    public int getEND(){
-        return nEND;
-    }
+public int getEND(){
+    return nEND;
+}
 
-    public int getSTR(){
-        return nSTR;
-    }
+public int getSTR(){
+    return nSTR;
+}
 
-    public int getFTH(){
-        return nFTH;
-    }
+public int getFTH(){
+    return nFTH;
+}
 
 
 
