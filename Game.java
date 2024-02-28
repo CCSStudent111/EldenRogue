@@ -38,13 +38,14 @@ public class Game {
     }
 
     private void characterCreation(Scanner scanner){
+        int nInput = 0;
     do{
         System.out.println("Character Creation\n\n");
         System.out.println("1. Input Name");
         System.out.println("2. Select Job Class");
         System.out.println("3. Confirm");
         System.out.println("4. Back\n");
-        int nInput = scanner.nextInt();
+        nInput = scanner.nextInt();
         scanner.nextLine();
         
         if(nInput < 1 || nInput > 4){
@@ -60,8 +61,10 @@ public class Game {
             break;
         case 3:
             handleConfirmation(scanner);
+            break;
         case 4:
-            handleBack(scanner);
+            handleBack(scanner, this);
+            break;
             }
         }while(nInput != 3 || nInput !=4);
     }
@@ -72,7 +75,6 @@ public class Game {
             playerName = scanner.nextLine();
             if (playerName.length() != 0 && playerName.length() <= 25) {
                 System.out.println("Username is set to: " + playerName);
-                handleConfirmation(scanner);
                 break;
             } else {
                 System.out.println("Username is not valid!");
@@ -101,7 +103,7 @@ public class Game {
         } while (true);
     }
 
-    private static void handleBack(Scanner scanner) {
+    private static void handleBack(Scanner scanner, Game game) {
         int nConfirm;
         do {
             System.out.println("Are you sure you want to go back?\n");
@@ -112,7 +114,7 @@ public class Game {
             scanner.nextLine(); // Consume newline character
 
             if (nConfirm == 1) {
-                start(scanner);
+                game.start();
                 break;
             } else if (nConfirm == 2) {
                 break;
