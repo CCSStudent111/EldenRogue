@@ -5,6 +5,8 @@ public class GridMovement {
     private static final int AREA1_COLS = 3;
     private static final int AREA2_ROWS = 7;
     private static final int AREA2_COLS = 7;
+    private static final int AREA3_ROWS = 7;
+    private static final int AREA3_COLS = 5;
     private static int currentArea = 1; // Current area
     private static int playerRow = 0;
     private static int playerCol = 1; // Starting position in Area 1
