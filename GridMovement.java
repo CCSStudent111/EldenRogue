@@ -29,6 +29,11 @@ public class GridMovement {
                 initializeGrid(area2);
                 displayGrid(area2);
                 playerMovement(scanner, area2);
+            } else if (currentArea == 3){
+                String [][] area3 = new String[AREA3_ROWS][AREA3_COLS];
+                initializeGrid(area3);
+                displayGrid(area3);
+                playerMovement(scanner, area3);
             }
         }
     }
@@ -69,10 +74,31 @@ public class GridMovement {
                 if (playerRow > 0) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
                     playerRow--;
-                } else {
+                }else if(currentArea == 2 && playerRow == 0 && playerCol == 3){
+                    System.out.println("Do you want to move to the previous area? (Y/N): ");
+                    Scanner scanner = new Scanner(System.in);
+                    String choice = scanner.next().toUpperCase();
+                    if (choice.equals("Y")) {
+                        currentArea = 1;
+                        playerRow = 6;
+                        playerCol = 1; // Door position for Area 1
+                        return true;
+                } 
+            } else if (currentArea == 3 && playerRow == 0 && playerCol == 2){
+                System.out.println("Do you want to move to the previous area? (Y/N): ");
+                    Scanner scanner = new Scanner(System.in);
+                    String choice = scanner.next().toUpperCase();
+                    if (choice.equals("Y")) {
+                        currentArea = 2;
+                        playerRow = 6;
+                        playerCol = 3; // Door position for Area 2
+                        return true;
+                } 
+            } else {
                     System.out.println("Cannot move up. Already at the top.");
                 }
                 break;
+                
             case "A":
                 if (playerCol > 0) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
@@ -81,33 +107,49 @@ public class GridMovement {
                     System.out.println("Cannot move left. Already at the leftmost.");
                 }
                 break;
-                case "S":
+            case "S":
                 if (currentArea == 1 && playerRow < AREA1_ROWS - 1) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
                     playerRow++;
                 } else if (currentArea == 1 && playerRow == 6 && playerCol == 1) {
                     System.out.println("Do you want to move to the next area? (Y/N): ");
-                    Scanner scanner = new Scanner(System.in);
+                    Scanner scanner = new Scanner(System.in);   
                     String choice = scanner.next().toUpperCase();
                     if (choice.equals("Y")) {
                         currentArea = 2;
                         playerRow = 0;
-                        playerCol = 6; // Changed from playerCol = 7 to playerCol = 6
+                        playerCol = 3; // Starting position for Area 2
                         return true;
                     }
                 } else if (currentArea == 2 && playerRow < AREA2_ROWS - 1) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
                     playerRow++;
+                } else if (currentArea == 2 && playerRow == 6 && playerCol == 3) {
+                    System.out.println("Do you want to move to the next area? (Y/N): ");
+                    Scanner scanner = new Scanner(System.in);
+                    String choice = scanner.next().toUpperCase();
+                    if (choice.equals("Y")) {
+                        currentArea = 3;
+                        playerRow = 0;
+                        playerCol = 2; // Starting position for Area 3
+                        return true;
+                    }
+                } else if (currentArea == 3 && playerRow < AREA3_ROWS - 1) {
+                    grid[playerRow][playerCol] = "[ ]"; // Clear current position
+                    playerRow++;
                 } else {
                     System.out.println("Cannot move down. Already at the bottom.");
                 }
-
                 break;
+            
             case "D":
                 if (currentArea == 1 && playerCol < AREA1_COLS - 1) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
                     playerCol++;
                 } else if (currentArea == 2 && playerCol < AREA2_COLS - 1) {
+                    grid[playerRow][playerCol] = "[ ]"; // Clear current position
+                    playerCol++;
+                } else if (currentArea == 3 && playerCol < AREA3_COLS - 1) {
                     grid[playerRow][playerCol] = "[ ]"; // Clear current position
                     playerCol++;
                 } else {
