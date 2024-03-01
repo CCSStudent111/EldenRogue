@@ -25,11 +25,10 @@ public class CharacterCreation{
                 inputName(scanner);
                 break;
             case 2:
-                // Getter Methods + if statement? //
+                JobClass.displayJobClasses();
                 break;
             case 3:
                 handleConfirmation(scanner);
-
                 }
         }while(nInput != 4);
 
