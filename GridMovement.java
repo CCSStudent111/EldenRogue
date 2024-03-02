@@ -5,8 +5,7 @@ import java.util.Random;
 
 
 /**
- * The `GridMovement` class in Java represents a game where the player can move through different
- * areas, encounter enemies, find treasures, and defeat bosses.
+ * This class represents the movement of the player within different areas of a grid-based game.
  */
 public class GridMovement {
     private static final int AREA1_ROW = 7; //All finals are in allcaps
@@ -19,14 +18,17 @@ public class GridMovement {
     private static int PRow = 0; //Starting position in Area 1; Row-side
     private static int PCol = 1; // Starting position in Area 1; Column-side
 
+
+    /**
+     * Constructor for GridMovement class; Starts the game.
+     */
     public GridMovement() {
         runGame();
     }
 
 
-    /**
-     * The `runGame` function in Java uses a while loop to continuously check the current area and then
-     * initializes, displays, and handles player movement for the corresponding game area.
+   /**
+     * Method to run the game loop.
      */
     public void runGame() {
         Scanner scanner = new Scanner(System.in);
@@ -51,14 +53,9 @@ public class GridMovement {
         }
     }
 
-    /**
-     * The `initializestage` function initializes a 2D array representing a stage with empty spaces and
-     * sets a player marker at a specific position.
-     * 
-     * @param stage The `stage` parameter is a 2D array of Strings that represents the game stage or
-     * board. Each element in the array corresponds to a cell on the stage. The method
-     * `initializestage` initializes the stage by setting each cell to "[ ]" except for the player's
-     * current position
+   /**
+     * Method to initialize the stage with empty cells.
+     * @param stage The stage to initialize.
      */
     private void initializestage(String[][] stage) {
         for (int i = 0; i < stage.length; i++) {
@@ -70,11 +67,8 @@ public class GridMovement {
     }
 
     /**
-     * The `displaystage` function in Java prints out a 2D array representing a stage, line by line.
-     * 
-     * @param stage A 2D array of strings representing the layout of Stormveil Castle. Each element in
-     * the array corresponds to a cell in the castle, and the strings represent the contents of each
-     * cell (e.g., walls, doors, enemies, items).
+     * Method to display the stage grid.
+     * @param stage The stage to display.
      */
     private void displaystage(String[][] stage) {
         System.out.println("Stormveil Castle:");
@@ -89,15 +83,9 @@ public class GridMovement {
     
    
     /**
-     * The function `playerMovement` takes user input to move a player within a game stage until a
-     * valid move is made.
-     * 
-     * @param scanner The `scanner` parameter in the `playerMovement` method is an object of the
-     * `Scanner` class in Java. It is used to read input from the user during the player's movement in
-     * the game.
-     * @param stage The `stage` parameter is a 2D array representing the game stage or map where the
-     * player can move around. Each element in the array corresponds to a specific position on the
-     * stage and may contain information about obstacles, items, or the player's current position. 
+     * Method to handle player movement.
+     * @param scanner Scanner object for user input.
+     * @param stage The stage in which the player is moving.
      */
     private void playerMovement(Scanner scanner, String[][] stage) {
         while (true) {
@@ -110,19 +98,12 @@ public class GridMovement {
         }
     }
 
+    
     /**
-     * The function `movePlayer` in Java handles player movement within different areas of a stage,
-     * including encountering enemies, finding treasure, and defeating bosses.
-     * 
-     * @param direction The `direction` parameter in the `movePlayer` method represents the direction
-     * in which the player intends to move. It is a string value that can be one of the following:
-     * @param stage The `stage` parameter is a 2D array representing the game stage where the player
-     * can move. Each element in the array corresponds to a position on the stage. The player's current
-     * position is denoted by `[X]`, empty spaces are represented by `[ ]`, and other elements may
-     * represent
-     * @return The method `movePlayer` is returning a boolean value. It returns `true` in certain
-     * conditions when the player successfully moves to a different area or defeats a boss, and it
-     * returns `false` in all other cases.
+     * Method to move the player according to the input direction.
+     * @param direction The direction in which the player is moving.
+     * @param stage The stage in which the player is moving.
+     * @return True if the player successfully moves, false otherwise.
      */
     private boolean movePlayer(String direction, String[][] stage) {
         Random r = new Random();
@@ -205,7 +186,7 @@ public class GridMovement {
                 }
 
                 if (currentArea == 3 && PRow == 6 && PCol == 2 && BossDefeat == true){
-                    //Put the call for the Game Lobby here.
+                    
                 }
                 break;
             
@@ -229,6 +210,7 @@ public class GridMovement {
         }
         stage[PRow][PCol] = "[X]"; // Update the stage with the new player position;
         
+        // Logic for encounters and events in different areas //
         if (currentArea == 1){
             if (stage[PRow][PCol] == stage[5][0] || stage[PRow][PCol] == stage[5][2]){
                 if (RNum <= 25){
@@ -270,9 +252,5 @@ public class GridMovement {
         }
 
         return false;
-    }
-    
-    public static void main(String[] args) {
-        new GridMovement().runGame();
     }
 }

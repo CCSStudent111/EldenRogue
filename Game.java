@@ -1,9 +1,15 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Game class manages the game flow, including character creation and game lobby options.
+ */
 public class Game {
-    public Player player = new Player();
+    public Player player = new Player(); // The player instance
 
+    /**
+     * Starts the game by displaying the main menu and handling user input.
+     */
     public void start() {
         Scanner scanner = new Scanner(System.in);
         int nInput;
@@ -28,6 +34,7 @@ public class Game {
                 characterCreation(scanner);
                 break;
             } else if (nInput == 2) {
+                System.exit(0);
                 break;
             } else {
                 System.out.println("Invalid Input!");
@@ -37,6 +44,10 @@ public class Game {
         scanner.close();
     }
 
+    /**
+     * Manages character creation, allowing the player to input their name and select a job class.
+     * @param scanner The Scanner object for user input.
+     */
     private void characterCreation(Scanner scanner){
         int nInput = 0;
         do{
@@ -89,6 +100,10 @@ public class Game {
         }while(true);
     }
 
+    /**
+     * Allows the player to input their name.
+     * @param scanner The Scanner object for user input.
+     */
     private void inputName(Scanner scanner) {
         String sInput;
         do {
@@ -104,6 +119,10 @@ public class Game {
         } while (true);
     }
 
+    /**
+     * Handles the confirmation of character creation.
+     * @param scanner The Scanner object for user input.
+     */
     private void handleConfirmation(Scanner scanner) {
         int nConfirm;
         do {
@@ -125,6 +144,11 @@ public class Game {
         } while (true);
     }
 
+    /**
+     * Handles the back option during character creation.
+     * @param scanner The Scanner object for user input.
+     * @param game The Game object to return to.
+     */
     private void handleBack(Scanner scanner, Game game) {
         int nConfirm;
         do {
@@ -146,6 +170,10 @@ public class Game {
         } while (true);
     }
 
+    /**
+     * Allows the player to select their job class.
+     * @param scanner The Scanner object for user input.
+     */
     private void selectJobClass(Scanner scanner){
         int nChoice;
         ArrayList<JobClass> jobclass = JobClass.getJobClass();
@@ -173,7 +201,10 @@ public class Game {
             } while (true);
         }
 
-
+    /**
+     * Manages the game lobby, providing options for the player to interact with the game.
+     * @param scanner The Scanner object for user input.
+     */
     private void gameLobby(Scanner scanner){
         int nInput = 0;
         do{
@@ -209,6 +240,7 @@ public class Game {
             switch(nInput){
             case 1: 
                 //insert Area 
+                new GridMovement().runGame();
                 break;
             case 2:
                 
@@ -220,7 +252,7 @@ public class Game {
                 
                 break;
             case 5:
-               
+               System.exit(0); // Debugging
                 break;
             default:
                 System.out.println("Invalid Input!");
