@@ -107,15 +107,22 @@ public class Game {
     private void inputName(Scanner scanner) {
         String sInput;
         do {
-            System.out.println("Enter your username (25 character limit):\n");
-            sInput = scanner.nextLine();
-            if (sInput.length() != 0 && sInput.length() <= 25) {
-                System.out.println("Username is set to: " + sInput);
-                player.setpName(sInput);
+            System.out.println("Enter your username (1-25 charcters):\n");
+            sInput = scanner.nextLine().trim();
+
+            if (sInput.length() < 1) {
+                System.out.println("Name must be at least 1 character long.\n");
+            } else if (sInput.length() > 25) {
+                System.out.println("Name must be at most 25 characters long.\n");
+                player.setpName(sInput.substring(0, 25));
                 break;
             } else {
-                System.out.println("Username is not valid!");
+                System.out.println("Hello, " + sInput + "!\n");
+                player.setpName(sInput);
+                break;
             }
+
+            
         } while (true);
     }
 
