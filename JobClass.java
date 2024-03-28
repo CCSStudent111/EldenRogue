@@ -55,6 +55,7 @@ public class JobClass{
     public static void displayJobClasses(){
 
         for (JobClass job : jobClass) {
+            System.out.println("Index: " + job.index);
             System.out.println("Class Name: " + job.className);
             System.out.println("Statistics:");
             System.out.println("Level: " + job.stats.getLVL());

@@ -8,6 +8,9 @@ public class Player{
     private Statistics pStats;
     // The job class of the player
     private JobClass pJob;
+    //  The number of runes the player has
+    private int pRunes;
+
 
      /**
      * Default constructor for Player class.
@@ -40,6 +43,10 @@ public class Player{
         return pJob;
     }
 
+    public int getpRunes(){
+        return pRunes;
+    }
+
     /**
      * Setter method for setting the name of the player.
      * @param pName The name to set for the player.
@@ -62,6 +69,10 @@ public class Player{
      */
     public void setpJob(JobClass pJob){
         this.pJob = pJob;
+    }
+
+    public void setpRunes(int pRunes){
+        this.pRunes = pRunes;
     }
 
 }

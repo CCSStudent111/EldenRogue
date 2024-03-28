@@ -10,6 +10,7 @@ public class Statistics{
     private int nEND;    // The endurance of the character
     private int nSTR;    // The strength of the character
     private int nFTH;    // The faith of the character
+    // private int nRunes;
     
     /**
      * Constructor to initialize the statistics of a character.
@@ -22,6 +23,7 @@ public class Statistics{
      * @param nFTH The faith of the character.
      */
     public Statistics(int nLVL, int nHP, int nDEX, int nINT, int nEND, int nSTR, int nFTH) {
+        // this.nRunes = nRunes;
         this.nLVL = nLVL;
         this.nHP = nHP;
         this.nDEX = nDEX;
@@ -31,6 +33,11 @@ public class Statistics{
         this.nFTH = nFTH;
     }
 
+    /*
+    public int getRunes() {
+        return nRunes;
+    }
+    */
 
     /**
      * Getter method to retrieve the level of the character.
@@ -87,4 +94,67 @@ public class Statistics{
     public int getFTH() {
         return nFTH;
     }
+    
+    /*
+    public void setRunes(int nRunes) {
+        this.nRunes = nRunes;
+    }
+    */
+
+    /**
+     * Getter method to retrieve the level of the character.
+     * @return The level of the character.
+     */
+    public void setLVL(int nLVL) {
+        this.nLVL = nLVL;
+    }
+
+    /**
+     * Getter method to retrieve the hit points of the character.
+     * @return The hit points of the character.
+     */
+    public void setHP(int nHP) {
+        this.nHP = nHP;
+    }
+
+    /**
+     * Getter method to retrieve the dexterity of the character.
+     * @return The dexterity of the character.
+     */
+    public void setDEX(int nDEX) {
+        this.nDEX = nDEX;
+    }
+
+    /**
+     * Getter method to retrieve the intelligence of the character.
+     * @return The intelligence of the character.
+     */
+    public void setINT(int nINT) {
+        this.nINT = nINT;
+    }
+
+    /**
+     * Getter method to retrieve the endurance of the character.
+     * @return The endurance of the character.
+     */
+    public void setEND(int nEND) {
+        this.nEND = nEND;
+    }
+
+    /**
+     * Getter method to retrieve the strength of the character.
+     * @return The strength of the character.
+     */
+    public void setSTR(int nSTR) {
+        this.nSTR = nSTR;
+    }
+
+    /**
+     * Getter method to retrieve the faith of the character.
+     * @return The faith of the character.
+     */
+    public void setFTH(int nFTH) {
+        this.nFTH = nFTH;
+    }
+
 }
