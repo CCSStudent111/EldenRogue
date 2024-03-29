@@ -52,7 +52,7 @@ public class Player{
     }
 
     public Inventory getInventory(){
-        return pInventory.displayInventory();
+        return pInventory;
     }
 
     public Weapon getequippedWeapon(){
