@@ -8,8 +8,12 @@ public class Player{
     private Statistics pStats;
     // The job class of the player
     private JobClass pJob;
-    //  The number of runes the player has
+    // The number of runes the player has
     private int pRunes;
+    // The inventory of the player
+    private Inventory pInventory;
+
+    private Weapon equippedWeapon;
 
 
      /**
@@ -47,6 +51,14 @@ public class Player{
         return pRunes;
     }
 
+    public Inventory getInventory(){
+        return pInventory.displayInventory();
+    }
+
+    public Weapon getequippedWeapon(){
+        return equippedWeapon;
+    }
+
     /**
      * Setter method for setting the name of the player.
      * @param pName The name to set for the player.
@@ -74,6 +86,20 @@ public class Player{
     public void setpRunes(int pRunes){
         this.pRunes = pRunes;
     }
+
+    public void setInventory(){
+        this.pInventory = pInventory;
+    }
+
+
+    public void equipWeapon(Weapon weapon){
+        if(this.pStats.getDEX() > weapon.getStats().getDEX() || this.pStats.getDEX() == 15){
+            this.equippedWeapon = weapon;
+        }else {
+            System.out.println("You don't meet the DEX requirement to equip this weapon.");
+        }
+    }
+
 
 }
 

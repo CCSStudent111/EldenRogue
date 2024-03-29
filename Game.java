@@ -212,7 +212,7 @@ public class Game {
      * Manages the game lobby, providing options for the player to interact with the game.
      * @param scanner The Scanner object for user input.
      */
-    private void gameLobby(Scanner scanner){
+    public void gameLobby(Scanner scanner){
         int nInput = 0;
         do{
             
@@ -247,7 +247,7 @@ public class Game {
                 levelUp(scanner);
                 break;           
             case 3:
-                
+                inventoryMenu(scanner, this);
                 break;
             case 4:
                 
@@ -301,6 +301,34 @@ public class Game {
     
     
         }while (true);
+    }
+
+    private void inventoryMenu(Scanner scanner, Game game){
+       
+       do{
+
+        if (player.getInventory() != null) {
+            player.getInventory().displayInventory();
+        } else {
+            System.out.println("Inventory is empty.");
+        }
+
+            System.out.println("1. Select Weapon\n");
+            System.out.println("2. Back\n");
+
+            int nInput = scanner.nextInt();
+            scanner.nextLine();
+
+            if (nInput == 1){
+                handleBack(scanner, game);
+            } else if (nInput == 2){
+                handleBack(scanner, game);
+            } else {
+                System.out.println("Invalid Input!\n");
+            }
+
+       }while(true);
+        
     }
     
     private void calculateCost(Statistics stats, int nChoice) {
