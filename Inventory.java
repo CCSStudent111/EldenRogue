@@ -7,6 +7,7 @@ public class Inventory {
         this.weapons = new ArrayList<>();
     }
 
+    /* 
     public void menus(scanner){
         System.out.println("1. Select Weapon\n");
         System.out.println("2. Back\n");
@@ -20,6 +21,7 @@ public class Inventory {
             game.gameLobby(scanner);
         }
     }
+    */
 
     public void displayInventory(){
 
