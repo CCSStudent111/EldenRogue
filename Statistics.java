@@ -33,6 +33,16 @@ public class Statistics{
         this.nFTH = nFTH;
     }
 
+    public Statistics(int nHP, int nDEX, int nINT, int nEND, int nSTR, int nFTH) {
+        this.nLVL = -1;
+        this.nHP = nHP;
+        this.nDEX = nDEX;
+        this.nINT = nINT;
+        this.nEND = nEND;
+        this.nSTR = nSTR;
+        this.nFTH = nFTH;
+    }
+
     /*
     public int getRunes() {
         return nRunes;

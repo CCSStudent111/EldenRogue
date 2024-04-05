@@ -92,11 +92,19 @@ public class Player{
     }
 
 
-    public void equipWeapon(Weapon weapon){
-        if(this.pStats.getDEX() > weapon.getStats().getDEX() || this.pStats.getDEX() == 15){
+    public boolean equipWeapon(int nIndex) {
+        Weapon weapon = this.pInventory.getWeaponByIndex(nIndex);
+        if (weapon == null) {
+            System.out.println("Weapon not found in inventory.");
+            return false;
+        }
+        if (this.pStats.getDEX() >= weapon.getStats().getDEX()) {
             this.equippedWeapon = weapon;
-        }else {
+            System.out.println("Weapon equipped successfully.");
+            return true;
+        } else {
             System.out.println("You don't meet the DEX requirement to equip this weapon.");
+            return false;
         }
     }
 

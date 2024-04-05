@@ -5,7 +5,13 @@ import java.util.Scanner;
  * The Game class manages the game flow, including character creation and game lobby options.
  */
 public class Game {
-    public Player player = new Player(); // The player instance
+    private Player player = new Player(); // The player instance
+    private Shop shop;
+
+    public Game(){
+        player = new Player();
+        shop = new Shop(); 
+    }
 
     /**
      * Starts the game by displaying the main menu and handling user input.
@@ -270,7 +276,7 @@ public class Game {
                 inventoryMenu(scanner, this);
                 break;
             case 4:
-                
+                shopMenu(scanner);
                 break;
             case 5:
                System.exit(0); // Debugging
@@ -298,12 +304,12 @@ public class Game {
             }
     
             System.out.println("What would you like to level up?\n");
-            System.out.println("1. Health - " + ((selectedStats.getLVL() * 100) / 2));
-            System.out.println("2. Endurance - " + ((selectedStats.getLVL() * 100) / 2));
-            System.out.println("3. Dexterity - " + ((selectedStats.getLVL() * 100) / 2));
-            System.out.println("4. Strength - " + ((selectedStats.getLVL() * 100) / 2));
-            System.out.println("5. Intelligence - " + ((selectedStats.getLVL() * 100) / 2));
-            System.out.println("6. Faith - " + ((selectedStats.getLVL() * 100) / 2));
+            System.out.println("1. Health - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
+            System.out.println("2. Endurance - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
+            System.out.println("3. Dexterity - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
+            System.out.println("4. Strength - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
+            System.out.println("5. Intelligence - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
+            System.out.println("6. Faith - " + ((selectedStats.getLVL() * 100) / 2) + " runes");
             System.out.println("7. Back\n");
     
             int nInput = 0;
@@ -340,9 +346,16 @@ public class Game {
             scanner.nextLine();
 
             if (nInput == 1){
-                handleBack(scanner, game);
+                System.out.println("Select the weapon index of the weapon you want to equip: \n");
+                int nIndex = scanner.nextInt();
+                scanner.nextLine();
+                if(player.equipWeapon(nIndex)) {
+                    System.out.println("The weapon has been equipped.");
+                } else {
+                    System.out.println("Failed to equip the weapon.");
+                }
             } else if (nInput == 2){
-                handleBack(scanner, game);
+                gameLobby(scanner);
             } else {
                 System.out.println("Invalid Input!\n");
             }
@@ -394,9 +407,32 @@ public class Game {
         }
     
         }
-    }
-    
 
+        public void shopMenu(Scanner scanner){
+            while(true){
+                shop.displayWeapons();
+                System.out.println("Select the index of the weapon you want to purchase.\n");
+                System.out.println("Enter 0 to go back.");
+        
+                int weaponIndex = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline
+        
+                if(weaponIndex == 0) {
+                    // The user chose to go back
+                    break;
+                } else {
+                    // Attempt to purchase the selected weapon
+                    boolean purchaseSuccessful = shop.purchaseWeapon(player, weaponIndex);
+                    
+                    if(purchaseSuccessful) {
+                        System.out.println("Purchase successful!");
+                    } else {
+                        System.out.println("Purchase failed\n.");
+                    }
+                }
+            }
+        }
+}
             
     
 

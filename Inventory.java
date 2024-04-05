@@ -7,21 +7,7 @@ public class Inventory {
         this.weapons = new ArrayList<>();
     }
 
-    /* 
-    public void menus(scanner){
-        System.out.println("1. Select Weapon\n");
-        System.out.println("2. Back\n");
 
-        nInput = scanner.nextInt();
-        scanner.nextLine();
-
-        if(nInput == 1){
-            
-        } else{
-            game.gameLobby(scanner);
-        }
-    }
-    */
 
     public void displayInventory(){
 
@@ -44,13 +30,19 @@ public class Inventory {
         }
     }
 
+    public Weapon getWeaponByIndex(int index) {
+        for (Weapon weapon : this.weapons) {
+            if (weapon.getIndex() == index) {
+                return weapon;
+            }
+        }
+        return null;
+    }
+
     public void addWeapon(Weapon weapon){
         weapons.add(weapon);
     }
 
-    public void addToInventory(Weapon weapon) {
-        this.addWeapon(weapon);
-    }
 
 
 }

@@ -6,7 +6,7 @@ public class Weapon{
     private Statistics wStats;
     private int wRuneCost;
 
-    public Weapon(){
+    public Weapon(int wIndex, String wName, String wType, Statistics wStats, int wRuneCost){
         this.wIndex = wIndex;
         this.wName = wName;
         this.wType = wType;
