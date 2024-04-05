@@ -8,6 +8,7 @@ import java.util.Random;
  * This class represents the movement of the player within different areas of a grid-based game.
  */
 public class AcademyStage {
+
     private static final int AREA1_ROW = 5; //All finals are in allcaps
     private static final int AREA1_COL = 5;
     private static final int AREA2_ROW = 6;
@@ -21,21 +22,20 @@ public class AcademyStage {
     private static int currentArea = 1; // First Area
     private static int PRow = 0; //Starting position in Area 1; Row-side
     private static int PCol = 2; // Starting position in Area 1; Column-side
-    private int runes = 0;
     private int areaIndex = 2; //Area Index of the Academy
     Scanner scanner = new Scanner(System.in);
     /**
      * Constructor for AREA2 class; Starts the game.
      */
-    public AcademyStage() {
-        runGame();
+    public AcademyStage(Player player) {
+        runGame(player);
     }
 
 
    /**
      * Method to run the game loop.
      */
-    public void runGame() {
+    public void runGame(Player player) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -43,27 +43,27 @@ public class AcademyStage {
                 String[][] area1 = new String[AREA1_ROW][AREA1_COL];
                 initializestage(area1);
                 displaystage(area1);
-                playerMovement(scanner, area1);
+                playerMovement(scanner, area1, player);
             } else if (currentArea == 2) {
                 String[][] area2 = new String[AREA2_ROW][AREA2_COL];
                 initializestage(area2);
                 displaystage(area2);
-                playerMovement(scanner, area2);
+                playerMovement(scanner, area2, player);
             } else if (currentArea == 3){
                 String [][] area3 = new String[AREA3_ROW][AREA3_COL];
                 initializestage(area3);
                 displaystage(area3);
-                playerMovement(scanner, area3);
+                playerMovement(scanner, area3, player);
             } else if (currentArea == 4) {
                 String[][] area4 = new String[AREA4_ROW][AREA4_COL];
                 initializestage(area4);
                 displaystage(area4);
-                playerMovement(scanner, area4);
+                playerMovement(scanner, area4, player);
             } else if (currentArea == 5) {
                 String[][] area5 = new String[AREA5_ROW][AREA5_COL];
                 initializestage(area5);
                 displaystage(area5);
-                playerMovement(scanner, area5);
+                playerMovement(scanner, area5, player);
             }
         }
     }
@@ -103,11 +103,11 @@ public class AcademyStage {
      * @param scanner Scanner object for user input.
      * @param stage The stage in which the player is moving.
      */
-    private void playerMovement(Scanner scanner, String[][] stage) {
+    private void playerMovement(Scanner scanner, String[][] stage, Player player) {
         while (true) {
             System.out.print("Enter direction (Use WSAD to move) or M for the menu: ");
             String Sinput = scanner.next().toUpperCase();
-            if (movePlayer(Sinput, stage)) {
+            if (movePlayer(Sinput, stage, player)) {
                 break;
             }
             displaystage(stage); // Update the stage after each movement
@@ -121,7 +121,7 @@ public class AcademyStage {
      * @param stage The stage in which the player is moving.
      * @return True if the player successfully moves, false otherwise.
      */
-    private boolean movePlayer(String direction, String[][] stage) {
+    private boolean movePlayer(String direction, String[][] stage, Player player) {
         Random r = new Random();
         int low = 0;
         int high = 100;
@@ -129,6 +129,9 @@ public class AcademyStage {
         int i = r.nextInt(3 - 1 + 1) + low;
         boolean BossDefeat = false;
         boolean Activated = false;
+        int runes = player.getpRunes();
+        Battle battle = new Battle();
+
         switch (direction) {
             case "W":
                 if (PRow > 0) {
@@ -297,9 +300,6 @@ public class AcademyStage {
                 }
                 break;
 
-            case "M":
-                //Put code for the menu here.
-                break;
 
             default:
                 System.out.println("Please use WASD to move.");
@@ -318,12 +318,18 @@ public class AcademyStage {
                     Activated = true;
                 } else {
                     System.out.println("\nYou fought a monster. Here is its stats: ");
-                    System.out.println("Enemy Name: " + EnemyType.getEnemyTypeAcademy(i));
-                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndexAcademy(i) + 1));
-                    System.out.println("HP: " + EnemyType.HPValue(i));
-                    System.out.println("Attack: " + EnemyType.ATKValue(i) + "\n");
+                    System.out.println("Enemy Name: " + EnemyType.getEnemyType(i, areaIndex));
+                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndex(i, areaIndex) + 1));
+                    System.out.println("HP: " + (2 * EnemyType.HPValue(i)));
+                    System.out.println("Attack: " + (2 * EnemyType.ATKValue(i)));
+                    System.out.println("Physical Defense: " + EnemyType.PhysDefense(i));
+                    System.out.println("Sorcery Defense: " + EnemyType.SorceryDefense(i));
+                    System.out.println("Incantation Defense: " + EnemyType.IncanDefense(i) + "\n");
+                    battle.BattleMechanics(i, areaIndex, player);
+
                     Activated = true;
                 }
+
     
             } 
         }
@@ -337,10 +343,15 @@ public class AcademyStage {
                     Activated = true;
                 } else {
                     System.out.println("\nYou fought a monster. Here is its stats: ");
-                    System.out.println("Enemy Name: " + EnemyType.getEnemyTypeAcademy(i));
-                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndexAcademy(i) + 1));
-                    System.out.println("HP: " + EnemyType.HPValue(i));
-                    System.out.println("Attack: " + EnemyType.ATKValue(i) + "\n");
+                    System.out.println("Enemy Name: " + EnemyType.getEnemyType(i, areaIndex));
+                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndex(i, areaIndex) + 1));
+                    System.out.println("HP: " + (2 * EnemyType.HPValue(i)));
+                    System.out.println("Attack: " + (2 * EnemyType.ATKValue(i)));
+                    System.out.println("Physical Defense: " + EnemyType.PhysDefense(i));
+                    System.out.println("Sorcery Defense: " + EnemyType.SorceryDefense(i));
+                    System.out.println("Incantation Defense: " + EnemyType.IncanDefense(i) + "\n");
+                    battle.BattleMechanics(i, areaIndex, player);
+
                     Activated = true;
                 }
             } 
@@ -355,10 +366,14 @@ public class AcademyStage {
                     Activated = true;
                 } else {
                     System.out.println("\nYou fought a monster. Here is its stats: ");
-                    System.out.println("Enemy Name: " + EnemyType.getEnemyTypeAcademy(i));
-                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndexAcademy(i) + 1));
-                    System.out.println("HP: " + EnemyType.HPValue(i));
-                    System.out.println("Attack: " + EnemyType.ATKValue(i) + "\n");
+                    System.out.println("Enemy Name: " + EnemyType.getEnemyType(i, areaIndex));
+                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndex(i, areaIndex) + 1));
+                    System.out.println("HP: " + (2 * EnemyType.HPValue(i)));
+                    System.out.println("Attack: " + (2 * EnemyType.ATKValue(i)));
+                    System.out.println("Physical Defense: " + EnemyType.PhysDefense(i));
+                    System.out.println("Sorcery Defense: " + EnemyType.SorceryDefense(i));
+                    System.out.println("Incantation Defense: " + EnemyType.IncanDefense(i) + "\n");
+                    battle.BattleMechanics(i, areaIndex, player);
                     Activated = true;
                 
                 }
@@ -374,10 +389,14 @@ public class AcademyStage {
                     Activated = true;
                 } else {
                     System.out.println("\nYou fought a monster. Here is its stats: ");
-                    System.out.println("Enemy Name: " + EnemyType.getEnemyTypeAcademy(i));
-                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndexAcademy(i) + 1));
-                    System.out.println("HP: " + EnemyType.HPValue(i));
-                    System.out.println("Attack: " + EnemyType.ATKValue(i) + "\n");
+                    System.out.println("Enemy Name: " + EnemyType.getEnemyType(i, areaIndex));
+                    System.out.println("Enemy Value: " + (EnemyType.getEnemyTypeIndex(i, areaIndex) + 1));
+                    System.out.println("HP: " + (2 * EnemyType.HPValue(i)));
+                    System.out.println("Attack: " + (2 * EnemyType.ATKValue(i)));
+                    System.out.println("Physical Defense: " + EnemyType.PhysDefense(i));
+                    System.out.println("Sorcery Defense: " + EnemyType.SorceryDefense(i));
+                    System.out.println("Incantation Defense: " + EnemyType.IncanDefense(i) + "\n");
+                    battle.BattleMechanics(i, areaIndex, player);
                     Activated = true;
                 
                 }
@@ -402,7 +421,4 @@ public class AcademyStage {
     }
 
 
-    public static void main(String[] args) {
-        new AcademyStage().runGame();
-    }
 }
