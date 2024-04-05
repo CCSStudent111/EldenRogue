@@ -258,11 +258,11 @@ public class Game {
 
                
                 if(nArea == 1){
-                    new CastleStage().runGame();
+                    new CastleStage(player).runGame(player);
                 } else if (nArea == 2){
-                    new AcademyStage().runGame();
+                    new AcademyStage(player).runGame(player);
                 } else if (nArea == 3){
-                    //Area3
+                    new EldenThrone().runGame();
                 } else {
                     System.out.println("Invalid Input!");
                 }
